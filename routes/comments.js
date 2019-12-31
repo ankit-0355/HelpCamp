@@ -11,10 +11,10 @@ router.get("/new", IsLoggedIn, function(req, res){
 		} else {
 			res.render("comment/new", {campground: campground});
 		}
-	});
+	})
 });
 
-router.post("/comments", IsLoggedIn, function(req, res){
+router.post("/", IsLoggedIn, function(req, res){
 	Campground.findById(req.params.id, function(err, campground){
 		if(err) {
 			console.log(err);
@@ -25,9 +25,13 @@ router.post("/comments", IsLoggedIn, function(req, res){
 				if (err) {
 					console.log(err);
 				} else {
+					comment.author.id = req.user._id;
+					comment.author.username = req.user.username;
+					comment.save();
 					campground.comments.push(comment);
 					campground.save();
-					res.redirect("/campground" + campground_id);
+					console.log(comment);
+					res.redirect("/campground/" + campground._id);
 				}
 			});
 		}

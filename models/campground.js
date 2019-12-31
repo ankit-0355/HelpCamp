@@ -5,11 +5,11 @@ var campgroundSchema = new mongoose.Schema({
 	name: String,
 	image: String,
 	description: String,
-	user:
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User"
-		},
+	// user:
+	// 	{
+	// 		type: mongoose.Schema.Types.ObjectId,
+	// 		ref: "User"
+	// 	},
 	comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
