@@ -27,7 +27,6 @@ router.post("/", IsLoggedIn ,function(req, res){
 		id: req.user._id,
 		username: req.user.username
 	}
-	
 	//Storing data in an obj
 	var newCampground = {name: name, image: image, description: description, author: author}
 	//Using create function on Campground which is model. Passing obj
@@ -46,6 +45,27 @@ router.get("/:id", function(req, res){
 			console.log(err);
 		} else {
 			res.render("campground/show", {campground: foundCampground});	
+		}
+	});
+});
+
+router.get("/:id/edit", function(req, res){
+	Campground.findById(req.params.id, function(err, foundCampground){
+		if(err) {
+			console.log(err);
+		} else {
+			res.render("campground/edit",{campground: foundCampground});
+		}
+	});
+});
+
+router.put("/:id", function(req, res){
+	Campground.findByIdAndUpdate(req.params.id, {$set: req.body.campground}, function(err, updatedcampground){
+		if(err){
+			console.log(err);
+			res.redirect("/campground");
+		} else {
+			res.redirect("/campground/"+ updatedcampground._id);
 		}
 	});
 });
