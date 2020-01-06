@@ -15,7 +15,9 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 
-mongoose.connect("mongodb://localhost:27017/helpcamp",{useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect("mongodb://localhost:27017/helpcamp",{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://Ankit:Ankit@1998@cluster0-q9yjw.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser: true, useUnifiedTopology: true});
+
 mongoose.set('useFindAndModify', false);
 
 app.set("view engine", "ejs");
